@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Joe Brar</title>
+        <link rel="stylesheet" type="text/css" href="styleua.css">
+    </head>
+    <body>
+
+        <br>
+        <br>
+
+        <br>
+        <form enctype="multipart/form-data" method="post" action="handle.php">
+            <input type="file" id="fileupload" name="myfile" />
+            <input type="submit" value="Upload" id="submit" />
+        </form>
+        <br>
+        <p id="status"></p>
+        <h2 style="color:red"><u>CHAT :</u></h2>
+        <br>
+        <form>
+            <input type="radio" name="chatType" value="1" onclick="enterPassword(1)">New Chat<br>
+            <input type="radio" name="chatType" value="2" onclick="enterPassword(2)">Existing Chat
+        </form>
+        <br>
+        <div id="pass">
+            <form id="ncpass" action="" method="POST" style="display:none">
+                Enter new chat password : <input type="text" name="text">  <input type="button" name="button1" value="OK" onclick="func2(elements[0].value)"> 
+            </form>
+            <form id="ecpass" action="passSubmit.php" method="POST" style="display:none">
+                Enter existing chat password : <input type="text" name="text">  <input type="submit" value="OK" name="ec"> 
+            </form>
+        </div>
+        <p id="alert"></p>
+        <script>
+            var ch;
+            var p;
+            function enterPassword(ch)
+            {
+                if(ch==1)
+                {
+                    document.getElementById("ncpass").style.display="block";
+                    document.getElementById("ecpass").style.display="none";
+                }
+                if(ch==2)
+                {
+                    document.getElementById("ncpass").style.display="none";
+                    document.getElementById("ecpass").style.display="block";
+                }
+            }
+            function func2(p)
+            {
+                var xmlhttp1 = new XMLHttpRequest();
+                xmlhttp1.onreadystatechange = function() 
+                {
+                    if (this.readyState == 4 && this.status == 200) 
+                    {
+                        document.getElementById("alert").innerHTML = this.responseText;
+                    }
+                }
+                xmlhttp1.open("GET", "passSubmit.php/?q="+p+"&i=1", true);
+                xmlhttp1.send();
+                showchat();
+                function showchat()
+                {
+                    var xmlhttp2 = new XMLHttpRequest();
+                    xmlhttp2.onreadystatechange = function() 
+                    {
+                        if (this.readyState == 4 && this.status == 200) 
+                        {
+                            document.getElementById("chat").innerHTML = this.responseText;
+                        }
+                    }
+                    xmlhttp2.open("GET", "show.php?p="+p, true);
+                    xmlhttp2.send();
+                    setTimeout(showchat,100);
+                }
+            }
+        </script>
+        <form id="myform" method="POST" action="">
+            <br>
+            <input type="text" name="textbox" value="">
+            <input type="button" name="button1" value="SEND" onclick="func(elements[0].value)">
+        </form>
+        <br>
+        <p id="chat"></p>
+        <script type="text/javascript">
+            //document.getElementById("chat").innerHTML="Happy";
+            function func(str)
+            {
+                document.getElementById("myform").elements[0].value="";
+                if(str!="")
+                {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() 
+                    {
+                        if (this.readyState == 4 && this.status == 200) 
+                        {
+                            document.getElementById("status").innerHTML = this.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET", "updateDB.php?q="+str, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
+        <script>
+            var c=1;
+            if(c==1)
+            {
+                showchat();
+                c=c+1;
+            }
+            function showchat()
+            {
+                var xmlhttp1 = new XMLHttpRequest();
+                xmlhttp1.onreadystatechange = function() 
+                {
+                    if (this.readyState == 4 && this.status == 200) 
+                    {
+                        document.getElementById("chat").innerHTML = this.responseText;
+                    }
+                }
+                xmlhttp1.open("GET", "show.php", true);
+                xmlhttp1.send();
+                setTimeout(showchat,100);
+            }
+        </script>
+
+        <form action="cleardata.php" method="GET">
+            <input type="submit" value="CLEAR CHAT">
+        </form>
+        <br>
+        <br>
+        <br>
+        <form action="Test.php" method="POST">
+            <input type="submit" name="name" value="TEST">
+        </form>
+
+        <!--
+        <form action="server.php">
+            <input type="submit" value="Create table">
+        </form>
+        <form action="add.php">
+            <input type="submit" value="ADD data">
+        </form>
+        <br><br>
+        <h5>Add data manually in studentnew1 :</h5>
+        <br><br>
+        <form id="form3" action="manualadd.php" method="POST">
+            Name :     <input type="text" name="text1" value=""><br>
+            Address :  <input type="text" name="text2" value=""><br>
+            Age  :     <input type="number" name="age" value=""><br>
+            <input type="submit" value="Submit">
+        </form>
+        -->
+
+
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ultimate Chat</title>
+    <link rel="stylesheet" type="text/css" href="styleuc.css">
+</head>
+<body>
+    <header>
+        <div class="title">
+            <a href="index.html"><h1>Ultimate Chat</h1></a>
+            <p><a href="howitworks.html" class="hiw">How it works?</a></p>
+        </div>
+    </header>
+    <section class="main-section">
+        <div class="internal-main-section">
+            <form class="form1" action="/mainchat" method="POST">
+                <div class="form1-name">
+                    <label for="name">Your Name :</label>
+                    <br>
+                    <input type="text" name="name" spellcheck="false" required>
+                </div>
+                <div class="form1-topic">
+                    <label for="room_id">Room ID or Topic :</label>
+                    <br>
+                    <input type="text" name="room_id" placeholder="(Your friends must enter same ID/Topic)" spellcheck="false" required>
+                </div>
+                <div class="submitbtn">
+                    <input type="submit" name="submit" value="JOIN">
+                </div>
+            </form>
+        </div>
+    </section>
+    <br>
+    <br>
+    <!--
+    <div class="chatboxsection">
+        <div class="mainChatBox">
+        </div>
+        <div class="textarea">
+            <textarea placeholder="Message" spellcheck="false"></textarea>
+        </div>
+        <div class="sendButton">
+            <button onclick="sendfunc()">SEND</button>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    -->
+    <br><br>
+    <script type="text/javascript" src="mainjs.js"></script>
+        <!--
+        <div class="controlwrapper">
+            <table class="controltable" cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    <tr>
+                        <td class="disconnectbtncell">
+                            <div class="disconnectbtnwrapper newbtn">
+                                <button class="disconnectbtn">
+                                    New<div class="btnkbshortcut">Esc</div>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="chatmsgcell">
+                            <div class="chatmsgwrapper">
+                                <textarea class="chatmsg disabled" cols="80" rows="3" disabled="" style="margin: 0px; width: 627px; height: 62px;"></textarea>
+                            </div>
+                        </td>
+                        <td class="sendbthcell">
+                            <div class="sendbtnwrapper">
+                                <button class="sendbtn" disabled="">
+                                    Send<div class="btnkbshortcut">Enter</div>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        -->
+</body>
+</html>
